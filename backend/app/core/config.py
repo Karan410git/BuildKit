@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     environment: str = "development"
     debug: bool = True
     log_level: str = "INFO"
+    database_url: str = "postgresql+psycopg2://user:password@localhost:5432/buildkit"
 
 
 settings = Settings()

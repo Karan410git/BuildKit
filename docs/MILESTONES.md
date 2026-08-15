@@ -105,27 +105,7 @@ Do not implement database or authentication functionality yet.
 
 ---
 
-## Milestone 4 — Generic Upload API
-
-Goal:
-
-Provide a reusable file upload foundation.
-
-Expected capabilities:
-
-* receive file
-* validate filename/extension where appropriate
-* configurable size limit
-* safe handling
-* generic response
-
-No domain-specific processing.
-
----
-
-# Phase 2 — Data and Runtime Infrastructure
-
-## Milestone 5 — PostgreSQL Foundation
+## Milestone 4 — PostgreSQL Foundation
 
 Goal:
 
@@ -144,13 +124,32 @@ No problem-specific models.
 
 ---
 
-## Milestone 6 — Database Migrations
+## Milestone 5 — Database Migrations
 
 Goal:
 
 Introduce a migration system for database schema evolution.
 
 Keep migration configuration minimal.
+
+---
+
+
+## Milestone 6 — Generic Upload API
+
+Goal:
+
+Provide a reusable file upload foundation.
+
+Expected capabilities:
+
+* receive file
+* validate filename/extension where appropriate
+* configurable size limit
+* safe handling
+* generic response
+
+No domain-specific processing.
 
 ---
 
@@ -191,7 +190,7 @@ No domain-specific roles or permissions.
 
 ---
 
-# Phase 3 — Frontend Utilities
+# Phase 2 — Frontend Utilities
 
 ## Milestone 9 — Frontend Foundation
 
@@ -245,7 +244,7 @@ Provide generic login/registration UI integrated with the backend authentication
 
 ---
 
-# Phase 4 — BuildKit Tooling
+# Phase 3 — BuildKit Tooling
 
 ## Milestone 14 — CLI Foundation
 
@@ -306,7 +305,7 @@ Possible checks:
 
 ---
 
-# Phase 5 — Later Enhancements
+# Phase 4 — Later Enhancements
 
 These are not required for the first usable BuildKit release.
 
