@@ -287,3 +287,5 @@ Such functionality must only be created after a problem statement explicitly req
 When uncertain between a larger solution and a smaller solution that fully satisfies the approved milestone, choose the smaller solution.
 
 Correctness, clarity, and reliability are more important than the amount of code produced.
+
+Once the existence or absence of relevant files has been established, do not run additional commands solely to reconfirm it.
