@@ -288,4 +288,4 @@ When uncertain between a larger solution and a smaller solution that fully satis
 
 Correctness, clarity, and reliability are more important than the amount of code produced.
 
-Once the existence or absence of relevant files has been established, do not run additional commands solely to reconfirm it.
+Once scope, required files, and implementation approach are clear, proceed directly. Do not spend extended reasoning time restating documentation or reconfirming already established repository facts.
