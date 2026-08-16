@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "name": "postgres",
+  "description": "PostgreSQL and SQLAlchemy database foundation.",
+  "selectable": false,
+  "requires": ["config"],
+  "files": [
+    {"source": "files/backend/app/db/__init__.py", "destination": "backend/app/db/__init__.py"},
+    {"source": "files/backend/app/db/database.py", "destination": "backend/app/db/database.py"}
+  ],
+  "frontend_dependencies": {},
+  "frontend_dev_dependencies": {},
+  "backend_dependencies": ["psycopg2-binary>=2.9", "sqlalchemy>=2.0"],
+  "backend_routes": [],
+  "frontend_routes": [],
+  "navigation": [],
+  "configuration": [
+    {"name": "DATABASE_URL", "default": "postgresql+psycopg2://postgres:postgresdev@localhost:5432/buildkit"}
+  ],
+  "migrations": []
+}

@@ -1,0 +1,46 @@
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #f6f8fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+* { box-sizing: border-box; }
+body { min-width: 320px; min-height: 100vh; margin: 0; }
+a { color: inherit; }
+.app-shell { min-height: 100vh; }
+.app-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+  padding: 1rem 2rem; color: #fff; background: #172033;
+}
+.app-brand { font-size: 1.125rem; font-weight: 700; text-decoration: none; }
+.app-nav { display: flex; gap: 1rem; }
+.app-nav a { color: #cbd5e1; text-decoration: none; }
+.app-nav a:hover, .app-nav a.active { color: #fff; }
+.app-main { width: min(960px, calc(100% - 2rem)); margin: 0 auto; padding: 4rem 0; }
+.home-card, .feature-card {
+  padding: 1.5rem; border: 1px solid #dfe5ef; border-radius: .75rem;
+  background: #fff; box-shadow: 0 .5rem 1.5rem rgb(23 32 51 / 8%);
+}
+.home-card h1, .feature-card h2 { margin-top: 0; }
+.home-card p { margin-bottom: 0; color: #526078; }
+.feature-heading { margin-bottom: 2rem; }
+.feature-heading h1 { margin-bottom: .5rem; }
+.feature-heading p { margin: 0; color: #526078; }
+.form-stack, .form-field { display: grid; gap: 1rem; }
+.form-field { gap: .375rem; }
+.form-field label { font-weight: 600; }
+.form-field input { width: 100%; padding: .75rem; border: 1px solid #b8c2d1; border-radius: .375rem; font: inherit; }
+.button { width: fit-content; padding: .7rem 1rem; border: 0; border-radius: .375rem; color: #fff; background: #2563eb; font: inherit; font-weight: 600; cursor: pointer; }
+.button:disabled { cursor: not-allowed; opacity: .6; }
+.status-message { margin: 0; padding: .75rem; border-radius: .375rem; background: #eef2ff; }
+.status-message.error { color: #991b1b; background: #fef2f2; }
+.status-message.success { color: #166534; background: #f0fdf4; }
+.metadata-list { display: grid; grid-template-columns: max-content 1fr; gap: .5rem 1rem; margin-bottom: 0; }
+.metadata-list dt { font-weight: 600; }
+.metadata-list dd { margin: 0; }
+@media (max-width: 600px) {
+  .app-header { align-items: flex-start; flex-direction: column; gap: .75rem; }
+  .app-nav { flex-wrap: wrap; }
+  .app-main { padding: 2rem 0; }
+}

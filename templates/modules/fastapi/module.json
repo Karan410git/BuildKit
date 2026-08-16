@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "name": "fastapi",
+  "description": "Minimal FastAPI application and health endpoint.",
+  "selectable": false,
+  "requires": ["config", "logging"],
+  "files": [
+    {"source": "files/backend/app/__init__.py", "destination": "backend/app/__init__.py"},
+    {"source": "files/backend/app/api/__init__.py", "destination": "backend/app/api/__init__.py"},
+    {"source": "files/backend/app/api/routes/__init__.py", "destination": "backend/app/api/routes/__init__.py"},
+    {"source": "files/backend/app/core/__init__.py", "destination": "backend/app/core/__init__.py"},
+    {"source": "files/backend/app/api/routes/health.py", "destination": "backend/app/api/routes/health.py"},
+    {"source": "files/backend/app/main.py", "destination": "backend/app/main.py"}
+  ],
+  "frontend_dependencies": {},
+  "frontend_dev_dependencies": {},
+  "backend_dependencies": ["fastapi>=0.100.0", "uvicorn>=0.20.0"],
+  "backend_routes": [{"module": "app.api.routes.health", "router": "router"}],
+  "frontend_routes": [],
+  "navigation": [],
+  "configuration": [],
+  "migrations": []
+}

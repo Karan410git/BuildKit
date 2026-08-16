@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "name": "frontend",
+  "description": "React, TypeScript, Vite, routing, layout, and API foundation.",
+  "selectable": false,
+  "requires": [],
+  "files": [
+    {"source": "files/frontend/package.json", "destination": "frontend/package.json"},
+    {"source": "files/frontend/tsconfig.json", "destination": "frontend/tsconfig.json"},
+    {"source": "files/frontend/vite.config.ts", "destination": "frontend/vite.config.ts"},
+    {"source": "files/frontend/index.html", "destination": "frontend/index.html"},
+    {"source": "files/frontend/.env.example", "destination": "frontend/.env.example"},
+    {"source": "files/frontend/src/main.tsx", "destination": "frontend/src/main.tsx"},
+    {"source": "files/frontend/src/App.tsx", "destination": "frontend/src/App.tsx"},
+    {"source": "files/frontend/src/app/router.tsx", "destination": "frontend/src/app/router.tsx"},
+    {"source": "files/frontend/src/app/layout/RootLayout.tsx", "destination": "frontend/src/app/layout/RootLayout.tsx"},
+    {"source": "files/frontend/src/config/env.ts", "destination": "frontend/src/config/env.ts"},
+    {"source": "files/frontend/src/lib/api.ts", "destination": "frontend/src/lib/api.ts"},
+    {"source": "files/frontend/src/styles/global.css", "destination": "frontend/src/styles/global.css"},
+    {"source": "files/frontend/src/pages/Home.tsx", "destination": "frontend/src/pages/Home.tsx"}
+  ],
+  "frontend_dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "frontend_dev_dependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
+  },
+  "backend_dependencies": [],
+  "backend_routes": [],
+  "frontend_routes": [],
+  "navigation": [],
+  "configuration": [
+    {"name": "VITE_API_BASE_URL", "default": "http://localhost:8000"},
+    {"name": "VITE_APP_NAME", "default": "BuildKit"}
+  ],
+  "migrations": []
+}

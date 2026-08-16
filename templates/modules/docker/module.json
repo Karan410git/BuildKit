@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "name": "docker",
+  "description": "Docker development environment for backend and PostgreSQL.",
+  "selectable": false,
+  "requires": ["fastapi", "postgres"],
+  "files": [
+    {"source": "files/backend/Dockerfile", "destination": "backend/Dockerfile"},
+    {"source": "files/docker-compose.yml", "destination": "docker-compose.yml"}
+  ],
+  "frontend_dependencies": {},
+  "frontend_dev_dependencies": {},
+  "backend_dependencies": [],
+  "backend_routes": [],
+  "frontend_routes": [],
+  "navigation": [],
+  "configuration": [
+    {"name": "POSTGRES_USER", "default": "postgres"},
+    {"name": "POSTGRES_PASSWORD", "default": "postgresdev"},
+    {"name": "POSTGRES_DB", "default": "buildkit"}
+  ],
+  "migrations": []
+}

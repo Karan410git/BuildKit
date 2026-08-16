@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "name": "charts",
+  "description": "Reusable static chart components with mock data.",
+  "selectable": true,
+  "requires": ["frontend"],
+  "files": [
+    {"source": "files/frontend/src/features/charts/ChartsPage.tsx", "destination": "frontend/src/features/charts/ChartsPage.tsx"},
+    {"source": "files/frontend/src/features/charts/components/LineChart.tsx", "destination": "frontend/src/features/charts/components/LineChart.tsx"},
+    {"source": "files/frontend/src/features/charts/styles.css", "destination": "frontend/src/features/charts/styles.css"}
+  ],
+  "frontend_dependencies": {"recharts": "^2.15.4"},
+  "frontend_dev_dependencies": {},
+  "backend_dependencies": [],
+  "backend_routes": [],
+  "frontend_routes": [
+    {"path": "charts", "component": "ChartsPage", "import": "../features/charts/ChartsPage"}
+  ],
+  "navigation": [{"label": "Charts", "to": "/charts"}],
+  "configuration": [],
+  "migrations": []
+}

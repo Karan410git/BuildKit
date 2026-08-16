@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import argparse
 
+from buildkit_cli.registry import load_registry
+
 
 def _not_implemented(command: str) -> int:
     print(f"The '{command}' command is not implemented yet.")
@@ -27,6 +29,16 @@ def remove_command(args: argparse.Namespace) -> int:
 
 
 def modules_command(args: argparse.Namespace) -> int:
-    """Handle the modules command once the module registry is implemented."""
+    """List modules from the internal BuildKit registry."""
     del args
-    return _not_implemented("modules")
+    registry = load_registry()
+    selectable = [registry[name] for name in registry if registry[name].selectable]
+    foundations = [registry[name] for name in registry if not registry[name].selectable]
+
+    print("Selectable feature modules:")
+    for manifest in selectable:
+        print(f"  {manifest.name:<10} {manifest.description}")
+    print("Foundation modules (automatically required):")
+    for manifest in foundations:
+        print(f"  {manifest.name:<10} {manifest.description}")
+    return 0

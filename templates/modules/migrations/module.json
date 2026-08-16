@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "name": "migrations",
+  "description": "Alembic database migration foundation.",
+  "selectable": false,
+  "requires": ["postgres"],
+  "files": [
+    {"source": "files/backend/alembic.ini", "destination": "backend/alembic.ini"},
+    {"source": "files/backend/alembic/env.py", "destination": "backend/alembic/env.py"},
+    {"source": "files/backend/alembic/script.py.mako", "destination": "backend/alembic/script.py.mako"}
+  ],
+  "frontend_dependencies": {},
+  "frontend_dev_dependencies": {},
+  "backend_dependencies": ["alembic>=1.13.0"],
+  "backend_routes": [],
+  "frontend_routes": [],
+  "navigation": [],
+  "configuration": [],
+  "migrations": []
+}

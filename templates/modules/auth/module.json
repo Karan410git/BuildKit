@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "name": "auth",
+  "description": "Generic registration, login, JWT, and profile capability.",
+  "selectable": true,
+  "requires": ["frontend", "fastapi", "postgres", "migrations", "config"],
+  "files": [
+    {"source": "files/backend/app/api/routes/auth.py", "destination": "backend/app/api/routes/auth.py"},
+    {"source": "files/backend/app/core/security.py", "destination": "backend/app/core/security.py"},
+    {"source": "files/backend/app/models/user.py", "destination": "backend/app/models/user.py"},
+    {"source": "files/backend/app/schemas/auth.py", "destination": "backend/app/schemas/auth.py"},
+    {"source": "files/backend/alembic/versions/20260816_000001_create_users_table.py", "destination": "backend/alembic/versions/20260816_000001_create_users_table.py"},
+    {"source": "files/frontend/src/features/auth/api.ts", "destination": "frontend/src/features/auth/api.ts"},
+    {"source": "files/frontend/src/features/auth/LoginPage.tsx", "destination": "frontend/src/features/auth/LoginPage.tsx"},
+    {"source": "files/frontend/src/features/auth/RegisterPage.tsx", "destination": "frontend/src/features/auth/RegisterPage.tsx"},
+    {"source": "files/frontend/src/features/auth/ProfilePage.tsx", "destination": "frontend/src/features/auth/ProfilePage.tsx"}
+  ],
+  "frontend_dependencies": {},
+  "frontend_dev_dependencies": {},
+  "backend_dependencies": ["email-validator>=2.0.0", "PyJWT>=2.8.0", "pwdlib[argon2]>=0.2.0"],
+  "backend_routes": [{"module": "app.api.routes.auth", "router": "router"}],
+  "frontend_routes": [
+    {"path": "auth/register", "component": "RegisterPage", "import": "../features/auth/RegisterPage"},
+    {"path": "auth/login", "component": "LoginPage", "import": "../features/auth/LoginPage"},
+    {"path": "auth/profile", "component": "ProfilePage", "import": "../features/auth/ProfilePage"}
+  ],
+  "navigation": [
+    {"label": "Login", "to": "/auth/login"},
+    {"label": "Register", "to": "/auth/register"},
+    {"label": "Profile", "to": "/auth/profile"}
+  ],
+  "configuration": [
+    {"name": "JWT_SECRET_KEY", "default": "development-only-secret-key-32-bytes-long"},
+    {"name": "ACCESS_TOKEN_EXPIRE_MINUTES", "default": "30"}
+  ],
+  "migrations": ["backend/alembic/versions/20260816_000001_create_users_table.py"]
+}

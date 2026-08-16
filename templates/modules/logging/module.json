@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "name": "logging",
+  "description": "Reusable backend console logging.",
+  "selectable": false,
+  "requires": ["config"],
+  "files": [
+    {"source": "files/backend/app/core/logging.py", "destination": "backend/app/core/logging.py"}
+  ],
+  "frontend_dependencies": {},
+  "frontend_dev_dependencies": {},
+  "backend_dependencies": [],
+  "backend_routes": [],
+  "frontend_routes": [],
+  "navigation": [],
+  "configuration": [],
+  "migrations": []
+}

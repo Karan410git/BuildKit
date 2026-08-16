@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "name": "upload",
+  "description": "Generic validated upload API and single-file frontend UI.",
+  "selectable": true,
+  "requires": ["frontend", "fastapi", "config"],
+  "files": [
+    {"source": "files/backend/app/api/routes/upload.py", "destination": "backend/app/api/routes/upload.py"},
+    {"source": "files/frontend/src/features/upload/UploadPage.tsx", "destination": "frontend/src/features/upload/UploadPage.tsx"}
+  ],
+  "frontend_dependencies": {},
+  "frontend_dev_dependencies": {},
+  "backend_dependencies": ["python-multipart>=0.0.6"],
+  "backend_routes": [{"module": "app.api.routes.upload", "router": "router"}],
+  "frontend_routes": [
+    {"path": "upload", "component": "UploadPage", "import": "../features/upload/UploadPage"}
+  ],
+  "navigation": [{"label": "Upload", "to": "/upload"}],
+  "configuration": [
+    {"name": "MAX_UPLOAD_SIZE", "default": "10485760"},
+    {"name": "ALLOWED_UPLOAD_EXTENSIONS", "default": "[.txt,.pdf,.png,.jpg,.jpeg,.gif,.csv,.json]"}
+  ],
+  "migrations": []
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "name": "maps",
+  "description": "Reusable static maps with mock markers.",
+  "selectable": true,
+  "requires": ["frontend"],
+  "files": [
+    {"source": "files/frontend/src/features/maps/MapsPage.tsx", "destination": "frontend/src/features/maps/MapsPage.tsx"},
+    {"source": "files/frontend/src/features/maps/components/StaticMap.tsx", "destination": "frontend/src/features/maps/components/StaticMap.tsx"},
+    {"source": "files/frontend/src/features/maps/styles.css", "destination": "frontend/src/features/maps/styles.css"}
+  ],
+  "frontend_dependencies": {"leaflet": "^1.9.4", "react-leaflet": "^4.2.1"},
+  "frontend_dev_dependencies": {"@types/leaflet": "^1.9.22"},
+  "backend_dependencies": [],
+  "backend_routes": [],
+  "frontend_routes": [
+    {"path": "maps", "component": "MapsPage", "import": "../features/maps/MapsPage"}
+  ],
+  "navigation": [{"label": "Maps", "to": "/maps"}],
+  "configuration": [],
+  "migrations": []
+}

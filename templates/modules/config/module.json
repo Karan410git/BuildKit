@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "name": "config",
+  "description": "Centralized backend environment configuration.",
+  "selectable": false,
+  "requires": [],
+  "files": [
+    {"source": "files/backend/app/core/config.py", "destination": "backend/app/core/config.py"},
+    {"source": "files/.env.example", "destination": ".env.example"}
+  ],
+  "frontend_dependencies": {},
+  "frontend_dev_dependencies": {},
+  "backend_dependencies": ["pydantic>=2.0", "pydantic-settings>=2.0"],
+  "backend_routes": [],
+  "frontend_routes": [],
+  "navigation": [],
+  "configuration": [
+    {"name": "APP_NAME", "default": "BuildKit"},
+    {"name": "ENVIRONMENT", "default": "development"},
+    {"name": "DEBUG", "default": "true"},
+    {"name": "LOG_LEVEL", "default": "INFO"}
+  ],
+  "migrations": []
+}
