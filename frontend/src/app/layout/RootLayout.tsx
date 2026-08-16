@@ -15,6 +15,10 @@ export default function RootLayout() {
           </NavLink>
           <NavLink to="/charts">Charts</NavLink>
           <NavLink to="/maps">Maps</NavLink>
+          <NavLink to="/upload">Upload</NavLink>
+          <NavLink to="/auth/login">Login</NavLink>
+          <NavLink to="/auth/register">Register</NavLink>
+          <NavLink to="/auth/profile">Profile</NavLink>
         </nav>
       </header>
       <main className="app-main">
