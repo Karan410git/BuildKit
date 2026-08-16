@@ -250,25 +250,51 @@ Provide generic login/registration UI integrated with the backend authentication
 
 Goal:
 
-Create the BuildKit CLI.
+Create the BuildKit CLI foundation.
 
-Initial target:
+Initial capabilities should support the future command structure for:
 
-```text
+```bash
 buildkit create <project-name>
+buildkit add <module>
 ```
 
-Keep the command surface minimal.
+The initial CLI should remain small.
+
+It must establish a clean command structure without implementing a complex plugin system.
 
 ---
 
-## Milestone 15 — Template System
+## Milestone 15 — Modular Template System
 
 Goal:
 
-Convert the validated reference implementation into project templates.
+Convert proven BuildKit capabilities into independently reusable templates/modules.
 
-Templates must reflect proven functionality only.
+Each supported module should define:
+
+* templates/files it owns
+* required dependencies
+* required configuration
+* dependencies on other BuildKit modules
+
+Initial module candidates:
+
+* config
+* logging
+* fastapi
+* postgres
+* migrations
+* upload
+* authentication
+* frontend
+* charts
+* maps
+* docker
+
+Modules must remain composable.
+
+Do not duplicate shared infrastructure between modules.
 
 ---
 
@@ -276,34 +302,79 @@ Templates must reflect proven functionality only.
 
 Goal:
 
-Generate a complete BuildKit project.
+Generate complete or selectively composed BuildKit projects.
 
-Expected capabilities:
+Required capabilities:
 
-* validate project name
-* validate destination
-* prevent accidental overwrites
-* render/copy templates
+### Full generation
+
+```bash
+buildkit create my-project
+```
+
+### Selective generation
+
+Support selecting only required BuildKit modules.
+
+Exact CLI syntax may be finalized during implementation.
+
+### Safe composition
+
+The generator must:
+
+* resolve module dependencies
+* avoid duplicate modules
 * generate configuration placeholders
-* produce clear completion/error output
+* prevent unsafe overwrites
+* produce a runnable project
+* provide clear completion and error output
 
 ---
 
-## Milestone 17 — Generated Project Validation
+## Milestone 17 — Add Module to Existing Project
 
 Goal:
 
-Automatically verify generated projects.
+Allow individual BuildKit modules to be added safely to an existing compatible project.
 
-Possible checks:
+Target workflow:
 
-* expected files exist
-* backend imports correctly
-* configuration loads
-* API tests pass
-* generated project starts successfully
+```bash
+buildkit add <module>
+```
+
+Required capabilities:
+
+* identify modules already present
+* resolve missing dependencies
+* detect conflicts
+* prevent silent overwrites
+* add only required files/configuration/dependencies
+* report exactly what changed
+
+This milestone must remain limited to BuildKit-compatible projects for the first version.
+
+Do not attempt arbitrary framework migration or automatic modification of unrelated codebases.
 
 ---
+
+## Milestone 18 — Generated Project Validation
+
+Goal:
+
+Automatically validate generated and composed projects.
+
+Validation should cover:
+
+* full BuildKit projects
+* selectively generated projects
+* projects where modules were added incrementally
+* dependency resolution
+* duplicate prevention
+* expected files
+* configuration loading
+* backend imports
+* relevant tests
 
 # Phase 4 — Later Enhancements
 

@@ -387,3 +387,153 @@ These additions should happen outside the generic BuildKit foundation.
 Build the smallest reusable foundation that reliably saves development time during a hackathon.
 
 Do not optimize BuildKit for hypothetical future complexity.
+
+## Modular Generation
+
+BuildKit must support both complete project generation and individual reusable modules.
+
+The goal is to avoid forcing every generated project to include infrastructure it does not need.
+
+### Full Project Generation
+
+BuildKit should support generating a standard complete starter project.
+
+Example:
+
+```bash
+buildkit create my-project
+```
+
+This may include the default recommended BuildKit stack.
+
+A later interactive flow may allow the user to select which components are included.
+
+---
+
+### Selective Project Generation
+
+BuildKit should support creating a new project with only selected capabilities.
+
+Examples:
+
+```bash
+buildkit create my-project --only fastapi
+```
+
+```bash
+buildkit create my-project --only fastapi,postgres
+```
+
+The exact CLI syntax may change during the CLI milestone, but selective generation is a required capability.
+
+---
+
+### Adding Modules to Existing Projects
+
+BuildKit should eventually support adding an individual BuildKit capability to an existing compatible project.
+
+Examples:
+
+```bash
+buildkit add logging
+buildkit add postgres
+buildkit add auth
+buildkit add upload
+buildkit add charts
+buildkit add maps
+```
+
+A module must not silently overwrite existing project code.
+
+Before applying a module, BuildKit should:
+
+1. inspect only the files required to determine compatibility
+2. detect conflicting files or configuration
+3. refuse unsafe overwrites
+4. report required dependencies
+5. apply only the selected module
+6. report exactly what changed
+
+---
+
+### Module Independence
+
+Where practical, BuildKit capabilities should be represented as independently reusable modules.
+
+Examples include:
+
+* config
+* logging
+* fastapi
+* postgres
+* migrations
+* upload
+* authentication
+* frontend
+* charts
+* maps
+* docker
+
+Modules may declare dependencies on other BuildKit modules.
+
+For example:
+
+```text
+logging -> config
+
+fastapi -> config + logging
+
+postgres -> config
+
+migrations -> postgres
+
+authentication -> fastapi + postgres + migrations
+
+upload -> fastapi
+```
+
+BuildKit should automatically resolve required dependencies rather than duplicating their implementation.
+
+---
+
+### Dependency Rules
+
+Module dependencies must remain explicit.
+
+If the user requests:
+
+```bash
+buildkit add auth
+```
+
+and authentication requires FastAPI, PostgreSQL, migrations, and configuration, BuildKit should determine which prerequisites already exist and add only the missing compatible components.
+
+It must not duplicate modules already present.
+
+---
+
+### Module Manifest
+
+The template/generator system should eventually maintain lightweight metadata describing each module.
+
+A module may define:
+
+* name
+* description
+* dependencies
+* files/templates
+* required packages
+* configuration variables
+* compatibility requirements
+
+Do not build a complex plugin architecture.
+
+The module manifest should remain simple and exist only to support safe composition of BuildKit's own modules.
+
+---
+
+### Primary Modular Design Rule
+
+BuildKit should allow a team to use only the infrastructure required by its project.
+
+The full starter is a convenient combination of modules, not a mandatory architecture.
