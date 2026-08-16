@@ -71,3 +71,26 @@ def test_settings_singleton_has_log_level():
     from app.core.config import settings
 
     assert settings.log_level == "INFO"
+
+
+# --- Upload configuration ---
+
+
+def test_default_max_upload_size():
+    assert Settings.model_fields["max_upload_size"].default == 10_485_760
+
+
+def test_default_allowed_upload_extensions():
+    assert ".txt" in Settings.model_fields["allowed_upload_extensions"].default
+    assert ".json" in Settings.model_fields["allowed_upload_extensions"].default
+
+
+def test_max_upload_size_from_env(monkeypatch):
+    monkeypatch.setenv("MAX_UPLOAD_SIZE", "5242880")
+    assert Settings().max_upload_size == 5242880
+
+
+def test_allowed_upload_extensions_singleton_has_defaults():
+    from app.core.config import settings
+
+    assert ".txt" in settings.allowed_upload_extensions

@@ -12,6 +12,17 @@ class Settings(BaseSettings):
     debug: bool = True
     log_level: str = "INFO"
     database_url: str = "postgresql+psycopg2://user:password@localhost:5432/buildkit"
+    max_upload_size: int = 10_485_760
+    allowed_upload_extensions: list[str] = [
+        ".txt",
+        ".pdf",
+        ".png",
+        ".jpg",
+        ".jpeg",
+        ".gif",
+        ".csv",
+        ".json",
+    ]
 
 
 settings = Settings()
