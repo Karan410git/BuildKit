@@ -89,9 +89,10 @@ def test_offline_migration_runs_without_database():
     assert config.get_main_option("sqlalchemy.url") == settings.database_url
 
 
-def test_no_migration_scripts_yet():
-    """Verify the versions directory exists and is empty (no domain models yet)."""
+def test_migration_script_exists_for_users_table():
+    """Verify a migration script exists for the users table."""
     versions_dir = BACKEND_DIR / "alembic" / "versions"
     assert versions_dir.is_dir()
     migration_files = list(versions_dir.glob("*.py"))
-    assert migration_files == [], "No migration scripts should exist yet"
+    assert migration_files, "A migration script for the users table should exist"
+    assert any("create_users_table" in path.name for path in migration_files)

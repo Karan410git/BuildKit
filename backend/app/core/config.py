@@ -12,6 +12,8 @@ class Settings(BaseSettings):
     debug: bool = True
     log_level: str = "INFO"
     database_url: str = "postgresql+psycopg2://user:password@localhost:5432/buildkit"
+    jwt_secret_key: str = "development-only-secret-key-32-bytes-long"
+    access_token_expire_minutes: int = 30
     max_upload_size: int = 10_485_760
     allowed_upload_extensions: list[str] = [
         ".txt",

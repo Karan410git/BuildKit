@@ -15,6 +15,7 @@ from sqlalchemy import engine_from_config, pool
 
 from app.core.config import settings
 from app.db.database import Base
+from app.models.user import User  # noqa: F401
 
 # this is the Alembic Config object provided by the alembic runtime
 config = context.config

@@ -22,6 +22,15 @@ def test_default_log_level():
     assert Settings.model_fields["log_level"].default == "INFO"
 
 
+def test_default_jwt_secret_key():
+    assert Settings.model_fields["jwt_secret_key"].default == "development-only-secret-key-32-bytes-long"
+    assert len(Settings.model_fields["jwt_secret_key"].default) >= 32
+
+
+def test_default_access_token_expire_minutes():
+    assert Settings.model_fields["access_token_expire_minutes"].default == 30
+
+
 # --- Environment variable overrides ---
 
 
@@ -50,12 +59,16 @@ def test_all_env_vars_override(monkeypatch):
     monkeypatch.setenv("ENVIRONMENT", "staging")
     monkeypatch.setenv("DEBUG", "false")
     monkeypatch.setenv("LOG_LEVEL", "ERROR")
+    monkeypatch.setenv("JWT_SECRET_KEY", "super-secret-key")
+    monkeypatch.setenv("ACCESS_TOKEN_EXPIRE_MINUTES", "45")
 
     config = Settings()
     assert config.app_name == "OverrideApp"
     assert config.environment == "staging"
     assert config.debug is False
     assert config.log_level == "ERROR"
+    assert config.jwt_secret_key == "super-secret-key"
+    assert config.access_token_expire_minutes == 45
 
 
 # --- Singleton accessibility ---
