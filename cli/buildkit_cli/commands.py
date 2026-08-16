@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 
 from buildkit_cli.generator import GenerationError, create_project
+from buildkit_cli.module_manager import ModuleOperationError, add_modules, remove_modules
 from buildkit_cli.registry import load_registry
 
 
@@ -28,15 +29,33 @@ def create_command(args: argparse.Namespace) -> int:
 
 
 def add_command(args: argparse.Namespace) -> int:
-    """Handle the add command once module management is implemented."""
-    del args
-    return _not_implemented("add")
+    """Add selectable modules to a managed BuildKit project."""
+    try:
+        result = add_modules(args.modules)
+    except ModuleOperationError as exc:
+        print(f"Error: {exc}")
+        return 1
+    print(f"Added modules: {', '.join(result.requested_modules)}")
+    print(f"Automatically included: {', '.join(result.automatic_modules) or 'none'}")
+    print(f"Installed modules: {', '.join(result.installed_modules)}")
+    if not result.changed:
+        print("No changes were necessary.")
+    return 0
 
 
 def remove_command(args: argparse.Namespace) -> int:
-    """Handle the remove command once module management is implemented."""
-    del args
-    return _not_implemented("remove")
+    """Safely remove selectable modules from a managed BuildKit project."""
+    try:
+        result = remove_modules(args.modules)
+    except ModuleOperationError as exc:
+        print(f"Error: {exc}")
+        return 1
+    print(f"Removed modules: {', '.join(result.requested_modules) or 'none'}")
+    print(f"Automatically removed: {', '.join(result.automatic_modules) or 'none'}")
+    print(f"Installed modules: {', '.join(result.installed_modules)}")
+    if not result.changed:
+        print("No changes were necessary.")
+    return 0
 
 
 def modules_command(args: argparse.Namespace) -> int:
