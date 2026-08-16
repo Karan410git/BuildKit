@@ -27,13 +27,12 @@ def test_command_arguments_are_parsed(arguments: list[str], expected: dict[str, 
         assert getattr(args, name) == value
 
 
-@pytest.mark.parametrize("command", ["create", "add", "remove"])
+@pytest.mark.parametrize("command", ["add", "remove"])
 def test_commands_return_controlled_not_implemented_result(
     command: str,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
     arguments = {
-        "create": ["create", "my-project"],
         "add": ["add", "auth"],
         "remove": ["remove", "maps"],
     }[command]

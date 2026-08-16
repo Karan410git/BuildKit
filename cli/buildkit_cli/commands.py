@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 
+from buildkit_cli.generator import GenerationError, create_project
 from buildkit_cli.registry import load_registry
 
 
@@ -11,9 +12,19 @@ def _not_implemented(command: str) -> int:
 
 
 def create_command(args: argparse.Namespace) -> int:
-    """Handle the create command once project generation is implemented."""
-    del args
-    return _not_implemented("create")
+    """Create a standalone BuildKit project."""
+    try:
+        result = create_project(args.project_name, args.modules)
+    except GenerationError as exc:
+        print(f"Error: {exc}")
+        return 1
+
+    selected = ", ".join(result.selected_modules) or "none"
+    automatic = [name for name in result.installed_modules if name not in result.selected_modules]
+    print(f"Created project: {result.project_path}")
+    print(f"Selected modules: {selected}")
+    print(f"Automatically included: {', '.join(automatic)}")
+    return 0
 
 
 def add_command(args: argparse.Namespace) -> int:
