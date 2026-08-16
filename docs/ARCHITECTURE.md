@@ -292,20 +292,19 @@ Docker should be introduced only after the individual services work independentl
 
 ## 16. CLI
 
-The BuildKit CLI will eventually provide commands such as:
+The BuildKit CLI provides:
 
 ```text
 buildkit create <project-name>
+buildkit create <project-name> --modules <module> [<module> ...]
+buildkit add <module> [<module> ...]
+buildkit remove <module> [<module> ...]
+buildkit modules
 ```
 
-Potential later commands:
-
-```text
-buildkit validate
-buildkit info
-```
-
-The initial CLI should remain small.
+The default project resolves `frontend` and `fastapi`, producing the permanent
+foundation `config`, `logging`, `fastapi`, and `frontend`. Selectable V1 modules
+are `auth`, `upload`, `charts`, and `maps`.
 
 Do not build a large plugin architecture.
 
@@ -313,7 +312,7 @@ Do not build a large plugin architecture.
 
 ## 17. Project Generator
 
-The generator should create a project from validated templates.
+The generator creates standalone projects from validated, explicit module templates.
 
 Core responsibilities:
 
@@ -325,6 +324,12 @@ Core responsibilities:
 6. Report clear errors.
 
 The generator must not invent domain-specific functionality.
+
+Generated projects contain `.buildkit/project.json`, recording explicit and
+resolved modules plus ownership and SHA-256 hashes for managed files. Module
+mutation is allowed only in a BuildKit-managed project. Add/remove operations
+must refuse unowned collisions and modified managed files, regenerate controlled
+integration and dependency files deterministically, and write state last.
 
 ---
 
@@ -404,7 +409,9 @@ Example:
 buildkit create my-project
 ```
 
-This may include the default recommended BuildKit stack.
+This includes the default `frontend` + `fastapi` selection and their resolved
+`config` + `logging` dependencies. It does not include PostgreSQL, migrations,
+Docker, or selectable features unless explicitly requested or transitively required.
 
 A later interactive flow may allow the user to select which components are included.
 
@@ -417,20 +424,20 @@ BuildKit should support creating a new project with only selected capabilities.
 Examples:
 
 ```bash
-buildkit create my-project --only fastapi
+buildkit create my-project --modules auth
 ```
 
 ```bash
-buildkit create my-project --only fastapi,postgres
+buildkit create my-project --modules auth charts maps
 ```
 
-The exact CLI syntax may change during the CLI milestone, but selective generation is a required capability.
+Only selectable modules may be passed explicitly. Required foundation modules are resolved automatically.
 
 ---
 
 ### Adding Modules to Existing Projects
 
-BuildKit should eventually support adding an individual BuildKit capability to an existing compatible project.
+BuildKit supports adding one or several capabilities to an existing managed project.
 
 Examples:
 
@@ -443,6 +450,10 @@ buildkit add charts
 buildkit add maps
 ```
 
+Multiple modules may be supplied in one command. Selected modules can be safely
+removed with `buildkit remove <module> [<module> ...]`; unused transitive
+dependencies are removed while the permanent default foundation is retained.
+
 A module must not silently overwrite existing project code.
 
 Before applying a module, BuildKit should:
@@ -453,6 +464,10 @@ Before applying a module, BuildKit should:
 4. report required dependencies
 5. apply only the selected module
 6. report exactly what changed
+
+Removal may delete only state-recorded files owned by removed modules whose
+current SHA-256 matches the recorded hash. Modified or unowned files cause the
+entire operation to fail before destructive changes.
 
 ---
 

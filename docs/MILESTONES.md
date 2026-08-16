@@ -248,6 +248,8 @@ Provide generic login/registration UI integrated with the backend authentication
 
 ## Milestone 14 — CLI Foundation
 
+Status: Complete
+
 Goal:
 
 Create the BuildKit CLI foundation.
@@ -266,6 +268,8 @@ It must establish a clean command structure without implementing a complex plugi
 ---
 
 ## Milestone 15 — Modular Template System
+
+Status: Complete
 
 Goal:
 
@@ -300,6 +304,8 @@ Do not duplicate shared infrastructure between modules.
 
 ## Milestone 16 — Project Generator
 
+Status: Complete
+
 Goal:
 
 Generate complete or selectively composed BuildKit projects.
@@ -333,6 +339,8 @@ The generator must:
 
 ## Milestone 17 — Add Module to Existing Project
 
+Status: Complete, including multi-module add and safe remove.
+
 Goal:
 
 Allow individual BuildKit modules to be added safely to an existing compatible project.
@@ -359,6 +367,8 @@ Do not attempt arbitrary framework migration or automatic modification of unrela
 ---
 
 ## Milestone 18 — Generated Project Validation
+
+Status: Complete
 
 Goal:
 
@@ -393,8 +403,10 @@ These must not be implemented unless explicitly approved.
 
 ---
 
-# Current Milestone
+# Current Status
 
-**Milestone 1 — Configuration**
+**BuildKit V1 validation and hardening complete.**
 
-No later milestone is currently authorized.
+The reference application, modular templates, project creation, module
+add/remove lifecycle, ownership protection, and generated-project structural
+validation are implemented and tested.
